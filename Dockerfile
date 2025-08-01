@@ -1,8 +1,10 @@
 FROM node:alpine3.20
 
-WORKDIR /tmp
+WORKDIR /app
 
 COPY index.js package.json ./
+
+RUN mkdir -p /app/temp && chmod -R 777 /app/temp
 
 EXPOSE 7860/tcp
 
