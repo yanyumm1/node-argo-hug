@@ -1,8 +1,9 @@
 FROM node:alpine3.20
 
-WORKDIR /tmp
+WORKDIR /app
 
-COPY index.js index.html package.json ./
+COPY index.js package.json ./
+COPY public ./public
 
 EXPOSE 7860/tcp
 
