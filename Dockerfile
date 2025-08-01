@@ -1,15 +1,16 @@
-FROM node:alpine3.20
+FROM node:slim
 
 WORKDIR /app
 
-COPY index.js package.json ./
+COPY . .
 
-RUN mkdir -p /app/temp && chmod -R 777 /app/temp
+EXPOSE 7860
 
-EXPOSE 7860/tcp
-
-RUN apk add --no-cache curl bash && \
+RUN apt update -y && \
+    apt install -y curl && \
+    chmod +x index.js && \
+    chmod -R 777 /app && \
     npm install && \
-    chmod +x index.js
+    apt clean && rm -rf /var/lib/apt/lists/*
 
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
